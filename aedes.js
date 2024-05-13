@@ -26,6 +26,7 @@ var defaultOptions = {
   authorizePublish: defaultAuthorizePublish,
   authorizeSubscribe: defaultAuthorizeSubscribe,
   authorizeForward: defaultAuthorizeForward,
+  sharedTopics: true,
   published: defaultPublished,
   trustProxy: false,
   trustedProxies: []
@@ -65,10 +66,12 @@ function Aedes (opts) {
 
   this.decodeProtocol = opts.decodeProtocol
   this.trustProxy = opts.trustProxy
+  this.sharedTopics = opts.sharedTopics
   this.trustedProxies = opts.trustedProxies
 
   this.clients = {}
   this.brokers = {}
+  this.groups = {}
 
   var heartbeatTopic = '$SYS/' + that.id + '/heartbeat'
   this._heartbeatInterval = setInterval(heartbeat, opts.heartbeatInterval)
